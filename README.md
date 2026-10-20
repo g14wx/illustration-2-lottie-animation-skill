@@ -108,15 +108,15 @@ persona/
 ## Instalación
 
 ```sh
-git clone https://github.com/g14wx/illustration-2-lottie-animation.git
-cd illustration-2-lottie-animation
+git clone https://github.com/g14wx/illustration-2-lottie-animation-skill.git
+cd illustration-2-lottie-animation-skill
 python3 instalar.py --revisar      # qué agentes hay y qué dependencias faltan (no instala nada)
 python3 instalar.py                # instala en todos los agentes que encuentre
 ```
 
 El instalador enlaza (o copia) esta carpeta con el nombre `animate-illustrations-with-lottie` dentro de la carpeta de skills de cada agente.
 **El nombre de la carpeta clonada da igual**: el enlace lleva el nombre de la skill, no el del clon (comprobado con un clon llamado
-`illustration-2-lottie-animation`).
+`illustration-2-lottie-animation-skill`).
 
 ### Opciones de `instalar.py`
 
@@ -147,7 +147,7 @@ El instalador enlaza (o copia) esta carpeta con el nombre `animate-illustrations
 - `agents` solo se instala con `--solo agents` o `--todos`: Gemini también lee `~/.agents/skills` y vería la skill dos veces. `--quitar` sí la revisa.
 - Si en un destino ya hay algo con ese nombre que no es esta skill, el instalador lo **salta** y lo dice (`SALTADO`).
 - Si clonas dentro de una carpeta de skills, usa `git clone <url> animate-illustrations-with-lottie`. Así el instalador dice `YA ESTÁ INSTALADO AQUÍ` y no toca
-  ni borra esa carpeta. Con el nombre por defecto (`illustration-2-lottie-animation`) quedan **dos entradas** en esa carpeta (el clon y el enlace) y el agente ve dos copias de la skill:
+  ni borra esa carpeta. Con el nombre por defecto (`illustration-2-lottie-animation-skill`) quedan **dos entradas** en esa carpeta (el clon y el enlace) y el agente ve dos copias de la skill:
   borra el clon o vuelve a clonar con el nombre de la skill. `--quitar` solo borra el enlace.
 
 ### Linux y macOS, Windows, actualizaciones
@@ -156,7 +156,7 @@ El instalador enlaza (o copia) esta carpeta con el nombre `animate-illustrations
 - Con `--copiar` pasa lo mismo que en Windows, también en Linux y macOS.
 
 ```sh
-cd illustration-2-lottie-animation
+cd illustration-2-lottie-animation-skill
 git pull
 python3 instalar.py        # solo hace falta si instalaste con copia (Windows o --copiar)
 ```
