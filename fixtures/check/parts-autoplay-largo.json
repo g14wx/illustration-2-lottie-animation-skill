@@ -1,0 +1,10 @@
+{
+  "_comment": "idle x3 = 5,9 s: supera el tope de 5 s de lo que arranca solo (se prueba contra valid.json)",
+  "segments": {
+    "idle": {
+      "autoplay": true,
+      "repeats": 3
+    },
+    "wave": {}
+  }
+}

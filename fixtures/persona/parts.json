@@ -1,0 +1,509 @@
+{
+ "_comment": "Fixture ORIGINAL del skill: una persona plana. Cabeza, pelo, cuello, torso, ojos y bocas salen del donante (donors/persona.svg) por índice; brazos, piernas, manos y zapatos son cápsulas dibujadas en código con articulaciones redondas (trazo 4). Formato: plantillas/parts.schema.md.",
+ "donors": {
+  "persona": "../donors/persona.svg"
+ },
+ "palette": {
+  "#f6c9a5": "#f0c8a0",
+  "#6a4a35": "#5a3d2b",
+  "#6b4b36": "#5a3d2b",
+  "#4f86f7": "#3366cc",
+  "#9a9aa3": "#8d8d95",
+  "#55555d": "#4a4a52",
+  "#e9e9ec": "#e4e4e7",
+  "#ffffff": "#ffffff",
+  "#000000": "#1b1b1f"
+ },
+ "parts": [
+  {
+   "name": "hairBack",
+   "node": "headGrp",
+   "donor": "persona",
+   "indices": [0,1]
+  },
+  {
+   "name": "neck",
+   "node": "chestGrp",
+   "donor": "persona",
+   "indices": [2,3]
+  },
+  {
+   "name": "shoeL",
+   "node": "ankleL",
+   "svg": "<path d=\"M419.93,821.72Q430,812 444,812L472,812Q486,812 486,826L486,854Q486,868 472,868L386,868Q372,868 382.07,858.28Z\" fill=\"#8d8d95\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "thighL",
+   "node": "hipL",
+   "svg": "<path d=\"M427.02,598.82L423.02,710.82A33,33 0 0 0 488.98,713.18L492.98,601.18A33,33 0 0 0 427.02,598.82Z\" fill=\"#4a4a52\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "shinL",
+   "node": "kneeL",
+   "svg": "<path d=\"M423.01,711.25L421.01,799.25A33,33 0 0 0 486.99,800.75L488.99,712.75A33,33 0 0 0 423.01,711.25Z\" fill=\"#4a4a52\"/><path d=\"M423.01,711.25L421.01,799.25A33,33 0 0 0 486.99,800.75L488.99,712.75\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "thighLCover",
+   "node": "hipL",
+   "svg": "<path d=\"M429.02,598.89L425.02,710.89A31,31 0 0 0 486.98,713.11L490.98,601.11A31,31 0 0 0 429.02,598.89Z\" fill=\"#4a4a52\"/><path d=\"M423.02,710.82A33,33 0 0 0 488.98,713.18\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "shoeR",
+   "node": "ankleR",
+   "svg": "<path d=\"M514,826Q514,812 528,812L556,812Q570,812 580.07,821.72L617.93,858.28Q628,868 614,868L528,868Q514,868 514,854Z\" fill=\"#8d8d95\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "thighR",
+   "node": "hipR",
+   "svg": "<path d=\"M507.02,601.18L511.02,713.18A33,33 0 0 0 576.98,710.82L572.98,598.82A33,33 0 0 0 507.02,601.18Z\" fill=\"#4a4a52\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "shinR",
+   "node": "kneeR",
+   "svg": "<path d=\"M511.01,712.75L513.01,800.75A33,33 0 0 0 578.99,799.25L576.99,711.25A33,33 0 0 0 511.01,712.75Z\" fill=\"#4a4a52\"/><path d=\"M511.01,712.75L513.01,800.75A33,33 0 0 0 578.99,799.25L576.99,711.25\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "thighRCover",
+   "node": "hipR",
+   "svg": "<path d=\"M509.02,601.11L513.02,713.11A31,31 0 0 0 574.98,710.89L570.98,598.89A31,31 0 0 0 509.02,601.11Z\" fill=\"#4a4a52\"/><path d=\"M511.02,713.18A33,33 0 0 0 576.98,710.82\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "torso",
+   "node": "chestGrp",
+   "donor": "persona",
+   "indices": [4,5]
+  },
+  {
+   "name": "handL",
+   "node": "wristL",
+   "svg": "<circle cx=\"389\" cy=\"612\" r=\"27\" fill=\"#f0c8a0\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "upperArmL",
+   "node": "shoulderL",
+   "svg": "<path d=\"M403.53,359.89L379.53,474.89A25,25 0 0 0 428.47,485.11L452.47,370.11A25,25 0 0 0 403.53,359.89Z\" fill=\"#3366cc\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "foreArmL",
+   "node": "elbowL",
+   "svg": "<path d=\"M379.16,477.16L367.16,582.16A25,25 0 0 0 416.84,587.84L428.84,482.84A25,25 0 0 0 379.16,477.16Z\" fill=\"#f0c8a0\"/><path d=\"M379.16,477.16L367.16,582.16A25,25 0 0 0 416.84,587.84L428.84,482.84\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "upperArmLCover",
+   "node": "shoulderL",
+   "svg": "<path d=\"M405.49,360.3L381.49,475.3A23,23 0 0 0 426.51,484.7L450.51,369.7A23,23 0 0 0 405.49,360.3Z\" fill=\"#3366cc\"/><path d=\"M379.53,474.89A25,25 0 0 0 428.47,485.11\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "handR",
+   "node": "wristR",
+   "svg": "<circle cx=\"611\" cy=\"612\" r=\"27\" fill=\"#f0c8a0\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "upperArmR",
+   "node": "shoulderR",
+   "svg": "<path d=\"M547.53,370.11L571.53,485.11A25,25 0 0 0 620.47,474.89L596.47,359.89A25,25 0 0 0 547.53,370.11Z\" fill=\"#3366cc\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "foreArmR",
+   "node": "elbowR",
+   "svg": "<path d=\"M571.16,482.84L583.16,587.84A25,25 0 0 0 632.84,582.16L620.84,477.16A25,25 0 0 0 571.16,482.84Z\" fill=\"#f0c8a0\"/><path d=\"M571.16,482.84L583.16,587.84A25,25 0 0 0 632.84,582.16L620.84,477.16\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "upperArmRCover",
+   "node": "shoulderR",
+   "svg": "<path d=\"M549.49,369.7L573.49,484.7A23,23 0 0 0 618.51,475.3L594.51,360.3A23,23 0 0 0 549.49,369.7Z\" fill=\"#3366cc\"/><path d=\"M571.53,485.11A25,25 0 0 0 620.47,474.89\" fill=\"none\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+  },
+  {
+   "name": "head",
+   "node": "headGrp",
+   "donor": "persona",
+   "indices": [18,19]
+  },
+  {
+   "name": "fringe",
+   "node": "headGrp",
+   "donor": "persona",
+   "indices": [20,21]
+  },
+  {
+   "name": "eyeL",
+   "node": "blinkL",
+   "donor": "persona",
+   "indices": [22]
+  },
+  {
+   "name": "eyeR",
+   "node": "blinkR",
+   "donor": "persona",
+   "indices": [23]
+  },
+  {
+   "name": "mouthNeutral",
+   "node": "headGrp",
+   "donor": "persona",
+   "indices": [24]
+  },
+  {
+   "name": "mouthSmile",
+   "node": "headGrp",
+   "donor": "persona",
+   "indices": [25],
+   "rest": {
+    "o": 0
+   }
+  }
+ ],
+ "joints": {
+  "feet": {
+   "x": 500,
+   "y": 868
+  },
+  "hem": {
+   "x": 500,
+   "y": 590
+  },
+  "neck": {
+   "x": 500,
+   "y": 300
+  },
+  "eyeL": {
+   "x": 466,
+   "y": 246
+  },
+  "eyeR": {
+   "x": 534,
+   "y": 246
+  },
+  "shoulderL": {
+   "x": 428,
+   "y": 365
+  },
+  "elbowL": {
+   "x": 404,
+   "y": 480
+  },
+  "wristL": {
+   "x": 392,
+   "y": 585
+  },
+  "shoulderR": {
+   "x": 572,
+   "y": 365
+  },
+  "elbowR": {
+   "x": 596,
+   "y": 480
+  },
+  "wristR": {
+   "x": 608,
+   "y": 585
+  },
+  "hipL": {
+   "x": 460,
+   "y": 600
+  },
+  "kneeL": {
+   "x": 456,
+   "y": 712
+  },
+  "ankleL": {
+   "x": 454,
+   "y": 800
+  },
+  "hipR": {
+   "x": 540,
+   "y": 600
+  },
+  "kneeR": {
+   "x": 544,
+   "y": 712
+  },
+  "ankleR": {
+   "x": 546,
+   "y": 800
+  }
+ },
+ "rig": {
+  "bodyGrp": {
+   "joint": "feet",
+   "parent": null
+  },
+  "chestGrp": {
+   "joint": "hem",
+   "parent": "bodyGrp"
+  },
+  "headGrp": {
+   "joint": "neck",
+   "parent": "chestGrp"
+  },
+  "blinkL": {
+   "joint": "eyeL",
+   "parent": "headGrp"
+  },
+  "blinkR": {
+   "joint": "eyeR",
+   "parent": "headGrp"
+  },
+  "shoulderL": {
+   "joint": "shoulderL",
+   "parent": "chestGrp"
+  },
+  "elbowL": {
+   "joint": "elbowL",
+   "parent": "shoulderL"
+  },
+  "wristL": {
+   "joint": "wristL",
+   "parent": "elbowL"
+  },
+  "shoulderR": {
+   "joint": "shoulderR",
+   "parent": "chestGrp"
+  },
+  "elbowR": {
+   "joint": "elbowR",
+   "parent": "shoulderR"
+  },
+  "wristR": {
+   "joint": "wristR",
+   "parent": "elbowR"
+  },
+  "hipL": {
+   "joint": "hipL",
+   "parent": "bodyGrp"
+  },
+  "kneeL": {
+   "joint": "kneeL",
+   "parent": "hipL"
+  },
+  "ankleL": {
+   "joint": "ankleL",
+   "parent": "kneeL"
+  },
+  "hipR": {
+   "joint": "hipR",
+   "parent": "bodyGrp"
+  },
+  "kneeR": {
+   "joint": "kneeR",
+   "parent": "hipR"
+  },
+  "ankleR": {
+   "joint": "ankleR",
+   "parent": "kneeR"
+  }
+ },
+ "limits": {
+  "shoulderL.r": [-150,150],
+  "shoulderR.r": [-150,150],
+  "elbowL.r": [-40,40],
+  "elbowR.r": [-40,40],
+  "headGrp.r": [-12,12],
+  "bodyGrp.y": [-60,20],
+  "bodyGrp.s": [0.9,1.1],
+  "chestGrp.s": [0.9,1.1],
+  "blinkL.s": [0.05,1.2],
+  "blinkR.s": [0.05,1.2]
+ },
+ "segments": {
+  "idle": {
+   "autoplay": true,
+   "repeats": 2
+  },
+  "wave": {
+   "autoplay": true,
+   "repeats": 1
+  },
+  "happy": {
+   "autoplay": true,
+   "repeats": 1
+  }
+ },
+ "plan": {
+  "keys": {
+   "idle": {
+    "dr": 60,
+    "keys": {
+     "chestGrp": {
+      "sy": [
+       [0,1,"io"],
+       [30,1.02,"io"],
+       [60,1]
+      ]
+     },
+     "headGrp": {
+      "r": [
+       [0,0,"io"],
+       [20,1.5,"io"],
+       [42,-1,"io"],
+       [60,0]
+      ]
+     },
+     "blinkL": {
+      "sy": [
+       [0,1,"lin"],
+       [44,1,"lin"],
+       [46,0.1,"lin"],
+       [49,0.1,"lin"],
+       [52,1,"lin"],
+       [60,1]
+      ]
+     },
+     "blinkR": {
+      "sy": [
+       [0,1,"lin"],
+       [44,1,"lin"],
+       [46,0.1,"lin"],
+       [49,0.1,"lin"],
+       [52,1,"lin"],
+       [60,1]
+      ]
+     },
+     "shoulderL": {
+      "r": [
+       [0,0,"io"],
+       [30,1.5,"io"],
+       [60,0]
+      ]
+     },
+     "shoulderR": {
+      "r": [
+       [0,0,"io"],
+       [30,-1.5,"io"],
+       [60,0]
+      ]
+     }
+    }
+   },
+   "wave": {
+    "dr": 75,
+    "keys": {
+     "shoulderR": {
+      "r": [
+       [0,0,"io"],
+       [4,6,"io"],
+       [16,-132,"io"],
+       [24,-125,"io"],
+       [60,-125,"io"],
+       [75,0]
+      ]
+     },
+     "elbowR": {
+      "r": [
+       [0,0,"io"],
+       [16,0,"io"],
+       [24,22,"io"],
+       [32,-12,"io"],
+       [40,22,"io"],
+       [48,-12,"io"],
+       [56,18,"io"],
+       [64,0,"io"],
+       [75,0]
+      ]
+     },
+     "headGrp": {
+      "r": [
+       [0,0,"io"],
+       [16,-3,"io"],
+       [60,-3,"io"],
+       [75,0]
+      ]
+     },
+     "chestGrp": {
+      "sy": [
+       [0,1,"io"],
+       [16,1.015,"io"],
+       [34,1,"io"],
+       [75,1]
+      ]
+     },
+     "mouthSmile": {
+      "o": [
+       [0,0,"hold"],
+       [10,1,"hold"],
+       [66,0,"hold"],
+       [75,0]
+      ]
+     },
+     "mouthNeutral": {
+      "o": [
+       [0,1,"hold"],
+       [10,0,"hold"],
+       [66,1,"hold"],
+       [75,1]
+      ]
+     }
+    }
+   },
+   "happy": {
+    "dr": 60,
+    "keys": {
+     "bodyGrp": {
+      "y": [
+       [0,0,"io"],
+       [8,8,"io"],
+       [20,-46,"o"],
+       [32,0,"i"],
+       [38,5,"io"],
+       [46,0,"io"],
+       [60,0]
+      ],
+      "sy": [
+       [0,1,"io"],
+       [8,0.96,"io"],
+       [20,1.03,"io"],
+       [32,1,"io"],
+       [38,0.97,"io"],
+       [46,1,"io"],
+       [60,1]
+      ]
+     },
+     "shoulderL": {
+      "r": [
+       [0,0,"io"],
+       [12,0,"io"],
+       [24,125,"io"],
+       [44,125,"io"],
+       [58,0,"io"],
+       [60,0]
+      ]
+     },
+     "shoulderR": {
+      "r": [
+       [0,0,"io"],
+       [12,0,"io"],
+       [24,-125,"io"],
+       [44,-125,"io"],
+       [58,0,"io"],
+       [60,0]
+      ]
+     },
+     "headGrp": {
+      "r": [
+       [0,0,"io"],
+       [24,-3,"io"],
+       [44,3,"io"],
+       [60,0]
+      ]
+     },
+     "mouthSmile": {
+      "o": [
+       [0,0,"hold"],
+       [6,1,"hold"],
+       [54,0,"hold"],
+       [60,0]
+      ]
+     },
+     "mouthNeutral": {
+      "o": [
+       [0,1,"hold"],
+       [6,0,"hold"],
+       [54,1,"hold"],
+       [60,1]
+      ]
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,19 @@
+node_modules/
+__pycache__/
+*.pyc
+*.tmp
+.DS_Store
+# lo que generan los scripts al probar o ilustrar (no es fuente del skill)
+salida/
+out/
+autoprueba-salida/
+*.index.html
+# datos locales, secretos y arte de terceros (el pack nunca entra al repo: ver referencias/01-recepcion-del-pack.md)
+.work/
+.env*
+*Zone.Identifier*
+Thumbs.db
+*.log
+resources/
+*.zip
+galeria-final.html

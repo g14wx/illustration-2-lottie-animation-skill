@@ -1,0 +1,206 @@
+{
+ "_comment": "Fixture ORIGINAL del skill: un reloj despertador plano. Todas las piezas salen del donante (donors/reloj.svg). El minutero da una vuelta completa en `ring` (360 = reposo, módulo 360).",
+ "donors": {
+  "reloj": "../donors/reloj.svg"
+ },
+ "palette": {
+  "#f6c9a5": "#f0c8a0",
+  "#6a4a35": "#5a3d2b",
+  "#6b4b36": "#5a3d2b",
+  "#4f86f7": "#3366cc",
+  "#9a9aa3": "#8d8d95",
+  "#55555d": "#4a4a52",
+  "#e9e9ec": "#e4e4e7",
+  "#ffffff": "#ffffff",
+  "#000000": "#1b1b1f"
+ },
+ "parts": [
+  {
+   "name": "bellL",
+   "node": "bellLGrp",
+   "donor": "reloj",
+   "indices": [0,1]
+  },
+  {
+   "name": "bellR",
+   "node": "bellRGrp",
+   "donor": "reloj",
+   "indices": [2,3]
+  },
+  {
+   "name": "body",
+   "node": "clockGrp",
+   "donor": "reloj",
+   "indices": [4,5]
+  },
+  {
+   "name": "face",
+   "node": "clockGrp",
+   "donor": "reloj",
+   "indices": [6,7]
+  },
+  {
+   "name": "ticks",
+   "node": "clockGrp",
+   "donor": "reloj",
+   "indices": [8,9,10,11]
+  },
+  {
+   "name": "hourHand",
+   "node": "hourGrp",
+   "donor": "reloj",
+   "indices": [12]
+  },
+  {
+   "name": "minuteHand",
+   "node": "minuteGrp",
+   "donor": "reloj",
+   "indices": [13]
+  },
+  {
+   "name": "hub",
+   "node": "clockGrp",
+   "donor": "reloj",
+   "indices": [14,15]
+  }
+ ],
+ "joints": {
+  "base": {
+   "x": 500,
+   "y": 860
+  },
+  "hub": {
+   "x": 500,
+   "y": 550
+  },
+  "bellL": {
+   "x": 400,
+   "y": 290
+  },
+  "bellR": {
+   "x": 600,
+   "y": 290
+  }
+ },
+ "rig": {
+  "clockGrp": {
+   "joint": "base",
+   "parent": null
+  },
+  "bellLGrp": {
+   "joint": "bellL",
+   "parent": "clockGrp"
+  },
+  "bellRGrp": {
+   "joint": "bellR",
+   "parent": "clockGrp"
+  },
+  "hourGrp": {
+   "joint": "hub",
+   "parent": "clockGrp"
+  },
+  "minuteGrp": {
+   "joint": "hub",
+   "parent": "clockGrp"
+  }
+ },
+ "limits": {
+  "clockGrp.y": [-20,5],
+  "clockGrp.r": [-10,10],
+  "bellLGrp.r": [-20,20],
+  "bellRGrp.r": [-20,20]
+ },
+ "segments": {
+  "idle": {
+   "autoplay": true,
+   "repeats": 2
+  },
+  "ring": {
+   "autoplay": true,
+   "repeats": 1
+  }
+ },
+ "plan": {
+  "keys": {
+   "idle": {
+    "dr": 48,
+    "keys": {
+     "clockGrp": {
+      "y": [
+       [0,0,"io"],
+       [24,-8,"io"],
+       [48,0]
+      ]
+     },
+     "minuteGrp": {
+      "r": [
+       [0,0,"io"],
+       [24,3,"io"],
+       [48,0]
+      ]
+     }
+    }
+   },
+   "ring": {
+    "dr": 45,
+    "keys": {
+     "clockGrp": {
+      "r": [
+       [0,0,"lin"],
+       [4,-6,"io"],
+       [8,6,"io"],
+       [12,-5.1,"io"],
+       [16,5.1,"io"],
+       [20,-3.6,"io"],
+       [24,3.6,"io"],
+       [28,-2.1,"io"],
+       [32,2.1,"io"],
+       [36,-0.9,"io"],
+       [40,0,"io"],
+       [45,0]
+      ]
+     },
+     "bellLGrp": {
+      "r": [
+       [0,0,"lin"],
+       [4,14,"io"],
+       [8,-14,"io"],
+       [12,11.9,"io"],
+       [16,-11.9,"io"],
+       [20,8.4,"io"],
+       [24,-8.4,"io"],
+       [28,4.9,"io"],
+       [32,-4.9,"io"],
+       [36,2.1,"io"],
+       [40,0,"io"],
+       [45,0]
+      ]
+     },
+     "bellRGrp": {
+      "r": [
+       [0,0,"lin"],
+       [4,-14,"io"],
+       [8,14,"io"],
+       [12,-11.9,"io"],
+       [16,11.9,"io"],
+       [20,-8.4,"io"],
+       [24,8.4,"io"],
+       [28,-4.9,"io"],
+       [32,4.9,"io"],
+       [36,-2.1,"io"],
+       [40,0,"io"],
+       [45,0]
+      ]
+     },
+     "minuteGrp": {
+      "r": [
+       [0,0,"io"],
+       [40,360,"io"],
+       [45,360]
+      ]
+     }
+    }
+   }
+  }
+ }
+}

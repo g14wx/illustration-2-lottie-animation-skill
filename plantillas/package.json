@@ -1,0 +1,6 @@
+{
+  "name": "plantillas-del-skill",
+  "private": true,
+  "type": "module",
+  "description": "Solo para que illustration-vanilla.js se lea como módulo ES en Node < 20.19 (las pruebas lo importan). No se copia a tu proyecto."
+}

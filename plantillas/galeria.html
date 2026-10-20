@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galería de ilustraciones animadas</title>
+<!-- Plantilla del skill animate-illustrations-with-lottie. No se edita a mano: `node plantillas/build-galeria.mjs manifiesto.json` mete aquí
+     los Lottie, los PNG originales, roles.json y las paletas, y deja UN solo HTML para compartir con quien aprueba.
+     Player: lottie-web 5.12.2 (build light) fijado desde cdnjs con su hash SRI (verificado contra la API de cdnjs), solo para revisar; con --player <archivo> el builder lo mete dentro y
+     la galería funciona sin red. Los assets reales cargan lottie-web@5.13.0 desde su propio servidor (ver Illustration.tsx). -->
+<style>
+:root {
+  --bg: #f4f4f6; --surface: #ffffff; --ink: #1b1b1f; --ink-2: #4a4a52; --line: #d4d4d9; --line-strong: #8d8d95;
+  --brand: #3366cc; --brand-ink: #ffffff; --brand-soft: #e6edfa; --bad: #a11d1d; --bad-soft: #fdeaea; --ok: #1f6b2f;
+  --paper: #ffffff;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #17181b; --surface: #22242a; --ink: #f2f2f4; --ink-2: #c4c4cc; --line: #3a3d44; --line-strong: #7a7d86;
+  --brand: #8fb0f2; --brand-ink: #101114; --brand-soft: #1f2c46; --bad: #ff9c9c; --bad-soft: #3a2020; --ok: #8fd19e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #17181b; --surface: #22242a; --ink: #f2f2f4; --ink-2: #c4c4cc; --line: #3a3d44; --line-strong: #7a7d86;
+  --brand: #8fb0f2; --brand-ink: #101114; --brand-soft: #1f2c46; --bad: #ff9c9c; --bad-soft: #3a2020; --ok: #8fd19e; color-scheme: dark }
+* { box-sizing: border-box }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--font) }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 32px 16px 64px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px }
+h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px }
+h2 { font-size: 20px; line-height: 1.3; margin: 0 }
+p { margin: 0 }
+.lede, .use, figcaption, .hint { color: var(--ink-2) }
+.bar { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px }
+.bar label { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; max-width: 100% }
+.bar select { min-width: 0; flex: 1 }
+select, button { font: 500 14px/1 var(--font); padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer }
+button.primary { background: var(--brand); border-color: var(--brand); color: var(--brand-ink) }
+button:hover, select:hover { border-color: var(--ink) }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px }
+#banner { display: none; padding: 12px 16px; border-radius: 8px; background: var(--bad-soft); color: var(--bad) }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 24px }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 16px; align-content: start; min-width: 0 }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px }
+figure { margin: 0; display: grid; gap: 8px; min-width: 0 }
+.paper { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; aspect-ratio: 1; overflow: hidden }
+.paper > .mount { width: 100%; height: 100% }
+.zoom .paper > .mount { transform: scale(3); transform-origin: var(--ox, 50%) var(--oy, 50%) }
+.orig img { width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px }
+figcaption { font: 13px/1.4 var(--mono) }
+.segs { display: flex; flex-wrap: wrap; gap: 8px }
+table { border-collapse: collapse; width: 100%; font: 13px/1.5 var(--mono) }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line) }
+td.bad { color: var(--bad); font-weight: 600 }
+td.ok { color: var(--ok) }
+.stack { position: relative }
+.stack > .mount { position: absolute; inset: 0 }
+.shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px }
+.shots img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #fff }
+ul.notes { margin: 0; padding-left: 20px; display: grid; gap: 4px }
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <header>
+    <h1 id="title">Galería de ilustraciones animadas</h1>
+    <p class="lede" id="intro"></p>
+  </header>
+  <div class="bar" role="group" aria-label="Controles de la galería">
+    <label>Paleta <select id="pal"></select></label>
+    <label><input type="checkbox" id="reduced"> Movimiento reducido</label>
+    <label><input type="checkbox" id="zoom"> Zoom 3× (mueve el ratón sobre el dibujo)</label>
+  </div>
+  <div id="banner" role="alert"></div>
+  <main class="grid" id="cards"></main>
+  <div class="grid" id="extra"></div>
+</div>
+<script type="application/json" id="galeria-data">{"title":"Galería de ilustraciones animadas","intro":"","roles":{},"palettes":{},"assets":[],"compose":null,"shots":[],"notes":[]}</script>
+<script id="player-cdn" src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_light.min.js" integrity="sha512-Pe5arL9TnWlLgXT1VY0d50tfo6J9bh0qM7irYJuACQcGz7mbIahBXZmNeav+46mTQBtPY170Vi89KDa4kd4QVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+(() => {
+  const G = JSON.parse(document.getElementById('galeria-data').textContent);
+  const $ = (s, r = document) => r.querySelector(s);
+  const FPS = 30, BURST_S = 5;
+
+  // <recolor>
+  const HEX6 = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i;
+  const toHex = (k) => '#' + k.slice(0, 3).map((v) => Math.round(v * 255).toString(16).padStart(2, '0')).join('');
+  function recolor(json, roles, readVar) {
+    const out = structuredClone(json);
+    const walk = (n) => {
+      if (!n || typeof n !== 'object') return;
+      const k = n.c?.k;
+      if ((n.ty === 'fl' || n.ty === 'st') && !n.c?.a && Array.isArray(k) && typeof k[0] === 'number') {
+        const token = roles[toHex(k)];
+        const rgb = token && HEX6.exec(String(readVar(token)).trim());
+        if (rgb) n.c.k = [...rgb.slice(1).map((h) => parseInt(h, 16) / 255), ...k.slice(3)];
+      }
+      Object.values(n).forEach(walk);
+    };
+    walk(out);
+    return out;
+  }
+  // </recolor>
+
+  document.title = G.title;
+  $('#title').textContent = G.title;
+  $('#intro').textContent = G.intro || '';
+  let pal = '', reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $('#reduced').checked = reduced;
+
+  const names = Object.keys(G.palettes);
+  $('#pal').innerHTML = '<option value="">Autoría (colores de roles.json, sin recolor)</option>' + names.map((n) => `<option>${n}</option>`).join('');
+  if (!names.length) $('#pal').disabled = true;
+
+  const fail = (msg) => { const b = $('#banner'); b.style.display = 'block'; b.textContent = msg; document.body.dataset.error = msg; };
+  if (typeof lottie === 'undefined') return fail('No cargó lottie-web (cdnjs). Abre la galería con red o genérala con --player <lottie_light.min.js>.');
+
+  const markersOf = (j) => Object.fromEntries((j.markers || []).map((m) => [m.cm, m]));
+  const cards = G.assets.map((a) => {
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.id = 'a-' + a.id;
+    const h = document.createElement('h2'); h.textContent = a.label || a.id;
+    const use = document.createElement('p'); use.className = 'use'; use.textContent = a.use || '';
+    el.append(h, use);
+    const pair = document.createElement('div'); pair.className = 'pair';
+    const fig = document.createElement('figure');
+    fig.innerHTML = '<div class="paper"><div class="mount" role="img"></div></div><figcaption class="readout" aria-live="polite">reposo</figcaption>';
+    $('.mount', fig).setAttribute('aria-label', 'Animación: ' + (a.label || a.id));
+    pair.append(fig);
+    if (a.png) {
+      const o = document.createElement('figure'); o.className = 'orig';
+      o.innerHTML = '<img alt=""><figcaption>Original (PNG del pack)</figcaption>';
+      $('img', o).src = a.png; $('img', o).alt = 'Original: ' + (a.label || a.id);
+      pair.append(o);
+    }
+    el.append(pair);
+    const segs = document.createElement('div'); segs.className = 'segs';
+    const table = document.createElement('table');
+    table.innerHTML = '<thead><tr><th>segmento</th><th>frames</th><th>pasadas</th><th>segundos</th></tr></thead><tbody></tbody>';
+    el.append(segs, table);
+    $('#cards').append(el);
+    return { a, el, box: $('.mount', fig), out: $('.readout', fig), segs, tbody: $('tbody', table), anim: null, data: a.data };
+  });
+
+  const rest = (c) => { const m = markersOf(c.data); c.anim.resetSegments(true); c.anim.goToAndStop(m.idle ? m.idle.tm : 0, true); c.out.textContent = 'reposo'; };
+  function mount(c) {
+    c.anim?.destroy();
+    c.box.innerHTML = '';
+    const json = pal ? recolor(c.data, G.roles, (t) => G.palettes[pal][t] ?? '') : structuredClone(c.data);
+    c.anim = lottie.loadAnimation({ container: c.box, renderer: 'svg', loop: false, autoplay: false, animationData: json });
+    c.anim.addEventListener('DOMLoaded', () => rest(c));
+    c.anim.addEventListener('complete', () => rest(c));
+    c.anim.addEventListener('enterFrame', () => { c.out.textContent = 'frame ' + Math.round(c.anim.currentFrame + (c.anim.firstFrame || 0)); });
+    const bg = G.palettes[pal]?.['--paper'];
+    document.documentElement.style.setProperty('--paper', bg || '#ffffff');
+  }
+  function play(c, name) {
+    const m = markersOf(c.data)[name], reps = c.data.meta?.repeats?.[name] ?? 1;
+    if (!m || reduced) { rest(c); c.out.textContent = reduced ? 'movimiento reducido: se queda en reposo' : 'reposo'; return; }
+    c.anim.loop = reps - 1;
+    c.anim.playSegments([m.tm, m.tm + m.dr], true);
+  }
+
+  // un asset trae el Lottie dentro (`data`, lo normal: build-galeria.mjs) o una URL relativa (`src`, solo si la página se sirve por http)
+  async function init(c) {
+    if (!c.data && c.a.src) {
+      try { c.data = await (await fetch(c.a.src)).json(); } catch { return fail(`No se pudo leer ${c.a.src}: si abres el archivo con file:// el navegador lo bloquea; sirve la carpeta por http o genera la galería con build-galeria.mjs.`); }
+    }
+    if (!c.data) return fail(`Falta el Lottie de "${c.a.id}" (json o src).`);
+    for (const m of c.data.markers || []) {
+      const reps = c.data.meta?.repeats?.[m.cm] ?? 1, secs = (m.dr / FPS) * reps;
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = '▶ ' + m.cm;
+      b.addEventListener('click', () => play(c, m.cm));
+      c.segs.append(b);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${m.cm}</td><td>${m.tm}–${m.tm + m.dr}</td><td>×${reps}</td><td class="${secs > BURST_S ? 'bad' : 'ok'}">${secs.toFixed(1)} s${secs > BURST_S ? ' (>5 s)' : ''}</td>`;
+      c.tbody.append(tr);
+    }
+    mount(c);
+  }
+
+  // Composición opcional (`compose: { bgs: [ids], cast: [ids] }`): un fondo y un personaje apilados en el mismo lienzo, cada uno con sus botones.
+  const layers = [];
+  function buildCompose() {
+    const byId = Object.fromEntries(cards.filter((c) => c.data).map((c) => [c.a.id, c]));
+    const el = document.createElement('article');
+    el.className = 'card compose';
+    el.innerHTML = '<h2>Composición</h2><p class="use">Fondo detrás y personaje encima, como se verán en la pantalla.</p>'
+      + '<div class="bar"><label>Fondo <select class="bg"></select></label><label>Personaje <select class="cast"></select></label></div>'
+      + '<figure><div class="paper stack"><div class="mount bgm"></div><div class="mount castm"></div></div><figcaption class="readout" aria-live="polite">reposo</figcaption></figure><div class="segs"></div>';
+    $('#extra').append(el);
+    const segs = $('.segs', el);
+    const pick = (cls, ids, box, out) => {
+      const sel = $('.' + cls, el), layer = { box, out, anim: null, data: null };
+      sel.innerHTML = ids.filter((i) => byId[i]).map((i) => `<option>${i}</option>`).join('');
+      layers.push(layer);
+      return { sel, layer };
+    };
+    const bg = pick('bg', G.compose.bgs || [], $('.bgm', el), document.createElement('span'));
+    const cast = pick('cast', G.compose.cast || [], $('.castm', el), $('.readout', el));
+    const refresh = () => {
+      segs.innerHTML = '';
+      for (const [who, { sel, layer }] of [['fondo', bg], ['personaje', cast]]) {
+        layer.data = byId[sel.value]?.data;
+        if (!layer.data) continue;
+        mount(layer);
+        for (const m of layer.data.markers || []) {
+          const b = document.createElement('button'); b.type = 'button'; b.textContent = `▶ ${who}: ${m.cm}`;
+          b.addEventListener('click', () => play(layer, m.cm));
+          segs.append(b);
+        }
+      }
+    };
+    bg.sel.addEventListener('change', refresh); cast.sel.addEventListener('change', refresh);
+    refresh();
+  }
+  // Notas (`notes: [{ title, text?, items? }]`: decisiones, límites aceptados, números de contraste) y capturas de pantallas reales (`shots`).
+  function buildExtras() {
+    for (const n of G.notes || []) {
+      const el = document.createElement('section'); el.className = 'card';
+      const h = document.createElement('h2'); h.textContent = n.title || '';
+      el.append(h);
+      if (n.text) { const p = document.createElement('p'); p.textContent = n.text; el.append(p); }
+      if (n.items?.length) { const ul = document.createElement('ul'); ul.className = 'notes'; n.items.forEach((t) => { const li = document.createElement('li'); li.textContent = t; ul.append(li); }); el.append(ul); }
+      $('#extra').append(el);
+    }
+    if (G.shots?.length) {
+      const el = document.createElement('section'); el.className = 'card';
+      el.innerHTML = '<h2>Pantallas reales</h2><div class="shots"></div>';
+      for (const s of G.shots) {
+        const f = document.createElement('figure'), img = document.createElement('img'), cap = document.createElement('figcaption');
+        img.src = s.png; img.alt = s.label || ''; cap.textContent = s.label || '';
+        f.append(img, cap); $('.shots', el).append(f);
+      }
+      $('#extra').append(el);
+    }
+  }
+
+  $('#pal').addEventListener('change', (e) => { pal = e.target.value; [...cards, ...layers].forEach((c) => c.anim && mount(c)); });
+  $('#reduced').addEventListener('change', (e) => { reduced = e.target.checked; [...cards, ...layers].forEach((c) => c.anim && rest(c)); });
+  $('#zoom').addEventListener('change', (e) => $('#root').classList.toggle('zoom', e.target.checked));
+  $('#root').addEventListener('pointermove', (e) => {
+    const p = e.target.closest?.('.paper');
+    if (!p) return;
+    const r = p.getBoundingClientRect();
+    p.style.setProperty('--ox', ((e.clientX - r.left) / r.width) * 100 + '%');
+    p.style.setProperty('--oy', ((e.clientY - r.top) / r.height) * 100 + '%');
+  });
+  Promise.all(cards.map(init)).then(() => {
+    if (G.compose) buildCompose();
+    buildExtras();
+    document.body.dataset.ready = String(cards.filter((c) => c.anim).length);
+  });
+})();
+</script>
+</body>
+</html>

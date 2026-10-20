@@ -1,0 +1,10 @@
+{
+  "#1b1b1f": "--illus-ink",
+  "#ffffff": "--illus-paper",
+  "#3366cc": "--illus-brand",
+  "#e4e4e7": "--illus-gray-100",
+  "#8d8d95": "--illus-gray-500",
+  "#4a4a52": "--illus-gray-700",
+  "#f0c8a0": "--illus-skin",
+  "#5a3d2b": "--illus-hair"
+}

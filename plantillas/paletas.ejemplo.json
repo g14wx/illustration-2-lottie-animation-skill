@@ -1,0 +1,15 @@
+{
+  "_comment": "Paletas para la galería (build-galeria.mjs): nombre → { token: valor }. Los tokens son los valores de roles.json. '--paper' es opcional: el fondo del lienzo de la galería (útil para ver el modo oscuro).",
+  "A": {
+    "--illus-ink": "#1b1b1f", "--illus-paper": "#ffffff", "--illus-brand": "#3366cc", "--illus-gray-100": "#e4e4e7",
+    "--illus-gray-500": "#8d8d95", "--illus-gray-700": "#4a4a52", "--illus-skin": "#f0c8a0", "--illus-hair": "#5a3d2b"
+  },
+  "B (marca verde)": {
+    "--illus-ink": "#1b1b1f", "--illus-paper": "#ffffff", "--illus-brand": "#0f7a5a", "--illus-gray-100": "#e4e4e7",
+    "--illus-gray-500": "#8d8d95", "--illus-gray-700": "#3b4650", "--illus-skin": "#c98f63", "--illus-hair": "#1f1a17"
+  },
+  "Oscuro": {
+    "--illus-ink": "#ffffff", "--illus-paper": "#292929", "--illus-brand": "#92b4f2", "--illus-gray-100": "#4d4d4d",
+    "--illus-gray-500": "#a3a3a3", "--illus-gray-700": "#c7c7c7", "--illus-skin": "#a06f4c", "--illus-hair": "#d9c7b8", "--paper": "#292929"
+  }
+}

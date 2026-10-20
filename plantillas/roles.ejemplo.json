@@ -1,0 +1,11 @@
+{
+  "_comment": "Las CLAVES son los colores con que se dibuja el arte (colores de autoría): van dentro de cada Lottie y NO cambian nunca, ni al cambiar la marca. Los VALORES son tokens CSS: cambiar la paleta es cambiar el valor del token en tu CSS, sin volver a exportar. Piel y pelo tienen rol propio desde el principio (no los compartas con grises ni con la tinta).",
+  "#1b1b1f": "--illus-ink",
+  "#ffffff": "--illus-paper",
+  "#3366cc": "--illus-brand",
+  "#e4e4e7": "--illus-gray-100",
+  "#8d8d95": "--illus-gray-500",
+  "#4a4a52": "--illus-gray-700",
+  "#f0c8a0": "--illus-skin",
+  "#5a3d2b": "--illus-hair"
+}

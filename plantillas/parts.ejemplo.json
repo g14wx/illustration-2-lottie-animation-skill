@@ -1,0 +1,56 @@
+{
+  "_comment": "Ejemplo mínimo y comentado: una pelota que respira y rebota. Es un parts.json REAL: `node SK/scripts/export-lottie.mjs SK/plantillas/parts.ejemplo.json --roles SK/plantillas/roles.ejemplo.json` lo exporta y pasa el gate. Todo campo que empieza con guion bajo lo ignoran los scripts. Cada campo está explicado en plantillas/parts.schema.md.",
+
+  "_comment_donors": "Con un pack de ilustraciones: donors = { clave: 'ruta/al/donante.svg' } (relativa a este archivo). Cada pieza saca sus elementos del donante por índice ({ name, donor, indices }); los índices salen de index-svg.mjs o de build-parts.mjs --list. Esta pelota se dibuja en código, así que no hay donantes.",
+  "donors": {},
+  "_comment_palette": "palette = { color del donante: color de autoría } (cada valor es una clave de roles.json). '#000000' es el negro por defecto del donante (la tinta). Una pieza puede llevar su propio `palette` (piel y pelo con color propio desde el principio).",
+  "palette": {},
+
+  "_comment_parts": "El orden manda: la PRIMERA pieza va al fondo del z-order. `node` = nodo del rig del que cuelga la pieza (mueve, gira y escala con él). `svg` = dibujo propio en un lienzo de 1000x1000 (solo path, circle, ellipse, rect, polygon, polyline; colores #rrggbb que existan en roles.json; sin gradientes). `rest.o` = opacidad en reposo (0 para una pieza que aparece solo durante una animación: ningún color se anima, se superponen piezas y se anima la opacidad).",
+  "parts": [
+    { "name": "shadow", "node": "shadowGrp", "svg": "<ellipse cx=\"500\" cy=\"775\" rx=\"150\" ry=\"26\" fill=\"#e4e4e7\"/>", "note": "sombra en el suelo; se achica cuando la pelota sube" },
+    { "name": "ball", "node": "ballGrp", "svg": "<circle cx=\"500\" cy=\"560\" r=\"200\" fill=\"#3366cc\" stroke=\"#1b1b1f\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>", "note": "cuerpo con contorno de tinta de 4" },
+    { "name": "shine", "node": "ballGrp", "svg": "<path d=\"M395,505A130,130 0 0 1 470,425\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"16\" stroke-linecap=\"round\"/>", "note": "reflejo; viaja con la pelota" }
+  ],
+
+  "_comment_joints": "Pivotes con nombre, en coordenadas del lienzo (las mismas de las piezas). Un nodo gira y escala alrededor de su pivote.",
+  "joints": { "bottom": { "x": 500, "y": 760 }, "floor": { "x": 500, "y": 775 } },
+
+  "_comment_rig": "Árbol de nodos. joint = pivote; parent = nodo padre o null. `at` (opcional) = dónde cae el pivote en reposo si no es el mismo punto; `rot` (opcional) = giro estático de reposo en grados. Los nombres de nodo NO pueden repetir el de una pieza. ballGrp pivota en la base: escalar en Y la aplasta contra el suelo.",
+  "rig": {
+    "ballGrp": { "joint": "bottom", "parent": null },
+    "shadowGrp": { "joint": "floor", "parent": null }
+  },
+
+  "_comment_limits": "Opcional. 'nodo.canal': [mín, máx] en valores relativos al reposo; export-lottie avisa si una clave se sale. Canales: x y (px), r (grados, horario), s (escala uniforme) sx sy (escala por eje), o (opacidad 0..1).",
+  "limits": { "ballGrp.y": [-260, 0], "ballGrp.s": [0.7, 1.2], "shadowGrp.s": [0.4, 1.1] },
+
+  "_comment_segments": "Qué segmentos existen (cada uno será un marker del Lottie). autoplay = arranca solo al verse: su duración x repeats debe ser <= 5 s. repeats = pasadas (el Lottie guarda UN ciclo y el player lo repite); se copia a meta.repeats.",
+  "segments": { "idle": { "autoplay": true, "repeats": 2 }, "bounce": { "autoplay": true, "repeats": 1 } },
+
+  "_comment_views": "Opcional. Las poses que hay que mirar: { segmento: [frames locales] }. `node SK/scripts/render.mjs pelota.json --views parts.json` pinta el reposo y esos frames en una hoja.",
+  "views": { "bounce": [8, 16, 29] },
+
+  "_comment_plan": "keys[segmento] = { dr, keys: { nodo|pieza: { canal: [[frame, valor, ease?], …] } } }. dr = frames del segmento (30 fps). Los frames van de 0 a dr, crecientes; los valores son RELATIVOS al reposo (0 en x, y, r; 1 en s, sx, sy, o); TODO segmento empieza y termina en reposo. ease = interpolación desde esa clave hasta la siguiente: lin | io (entra y sale suave) | i (acelera) | o (frena) | hold (escalón) | cr (Catmull-Rom por las claves). Sin `markers`, se calculan: cada segmento arranca un frame después de que acabe el anterior (lottie_light, al terminar un playSegments, cae en el primer frame del siguiente; ese frame de separación lo evita).",
+  "plan": {
+    "keys": {
+      "idle": {
+        "dr": 48,
+        "keys": {
+          "ballGrp": { "sy": [[0, 1, "io"], [24, 1.03, "io"], [48, 1]] },
+          "shadowGrp": { "s": [[0, 1, "io"], [24, 0.98, "io"], [48, 1]] }
+        }
+      },
+      "bounce": {
+        "dr": 40,
+        "keys": {
+          "ballGrp": {
+            "y": [[0, 0, "o"], [8, -6, "o"], [16, -200, "io"], [26, 0, "i"], [30, 0, "lin"], [40, 0]],
+            "sy": [[0, 1, "io"], [8, 0.9, "io"], [16, 1.08, "io"], [26, 1, "io"], [29, 0.85, "io"], [34, 1.03, "io"], [40, 1]]
+          },
+          "shadowGrp": { "s": [[0, 1, "io"], [16, 0.55, "io"], [26, 1, "io"], [40, 1]] }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "_comment": "Segmentos que check-lottie exige en valid.json",
+  "segments": {
+    "idle": {
+      "autoplay": true,
+      "repeats": 2
+    },
+    "wave": {}
+  }
+}
